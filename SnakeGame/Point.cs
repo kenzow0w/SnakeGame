@@ -51,7 +51,7 @@ namespace SnakeGame
 
         public bool IsHit (Point p)
         {
-            return p.x == this.x && p.y == this.y;
+            return this.x == p.x && this.y == p.y;
 
         }
 

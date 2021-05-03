@@ -26,14 +26,8 @@ namespace SnakeGame
 
         }
 
-
-
-        static void Main(string[] args)
+        public static void Menu()
         {
-            Console.SetWindowSize(80, 24);
-            Console.SetBufferSize(80, 24);
-            
-
             Console.ForegroundColor = ConsoleColor.Green;
 
             WriteAt("S N A K E       G A M E", 34, 5);
@@ -50,7 +44,7 @@ namespace SnakeGame
                     Console.Clear();
                     break;
                 case 2:
-                    WriteAt("Всего доброго ", 34, 12);
+                    WriteAt("Всего доброго! \n\n\n", 34, 12);
                     Environment.Exit(0);
                     break;
                 default:
@@ -58,6 +52,17 @@ namespace SnakeGame
                     break;
             }
 
+        }
+
+        static void Main(string[] args)
+        {
+            Console.SetWindowSize(80, 24);
+            Console.SetBufferSize(80, 24);
+            
+
+            Menu();
+
+            
             // отрисовка рамки
 
             Walls walls = new Walls(80, 24);
@@ -76,13 +81,15 @@ namespace SnakeGame
 
             while (true)
             {
-                if (walls.IsHit(snake))
+                if (walls.IsHit(snake) || snake.IsHitTail())
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
 
                     WriteAt("G A M E       O V E R", 34, 12);
 
                     Console.ResetColor();
+                    Console.ReadLine();
+                    
                     break;
 
 
@@ -98,7 +105,7 @@ namespace SnakeGame
                 }
 
 
-                Thread.Sleep(200);
+                Thread.Sleep(70);
 
 
 
@@ -107,9 +114,12 @@ namespace SnakeGame
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
-                Thread.Sleep(200);
-                snake.Move();
+                Thread.Sleep(70);
+                
             }
+
+           
+
             Console.ReadKey();
         }
 

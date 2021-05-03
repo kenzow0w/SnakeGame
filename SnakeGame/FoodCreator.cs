@@ -23,7 +23,7 @@ namespace SnakeGame
         {
             int x = random.Next(4, mapWidth - 4);
             int y = random.Next(4, mapHight - 4);
-            
+           
             return new Point(x, y, sym);
 
         }
